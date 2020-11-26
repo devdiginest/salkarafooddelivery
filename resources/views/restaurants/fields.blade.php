@@ -239,7 +239,7 @@
     </div>
     <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
         <!-- admin_commission Field -->
-        <div class="form-group row ">
+        <!-- <div class="form-group row ">
             {!! Form::label('admin_commission', trans("lang.restaurant_admin_commission"), ['class' => 'col-3 control-label text-right']) !!}
             <div class="col-9">
                 {!! Form::number('admin_commission', null,  ['class' => 'form-control', 'step'=>'any', 'placeholder'=>  trans("lang.restaurant_admin_commission_placeholder")]) !!}
@@ -247,7 +247,7 @@
                     {{ trans("lang.restaurant_admin_commission_help") }}
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="form-group row ">
             {!! Form::label('active', trans("lang.restaurant_active"),['class' => 'col-3 control-label text-right']) !!}
             <div class="checkbox icheck">

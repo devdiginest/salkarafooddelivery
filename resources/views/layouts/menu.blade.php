@@ -15,6 +15,13 @@
 
 <li class="nav-header">{{trans('lang.app_management')}}</li>
 
+@can('users.index')
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="{!! route('users.index') !!}">@if($icons)
+                <i class="nav-icon fa fa-users"></i>@endif<p>{{trans('lang.user_plural')}}</p></a>
+    </li>
+@endcan
+
 @can('cuisines.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('cuisines*') ? 'active' : '' }}" href="{!! route('cuisines.index') !!}">@if($icons)

@@ -86,7 +86,7 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'string',
         'phone' => 'string',
         'mobile' => 'string',
-        'admin_commission' =>'double',
+        //'admin_commission' =>'double',
         'delivery_fee'=>'double',
         'default_tax'=>'double',
         'delivery_range'=>'double',
@@ -107,7 +107,7 @@ class Restaurant extends Model implements HasMedia
         'delivery_fee' => 'nullable|numeric|min:0',
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
-        'admin_commission' => 'required|numeric|min:0',
+        //'admin_commission' => 'required|numeric|min:0',
     ];
 
     /**
