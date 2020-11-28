@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
         'show'
     ]);
 
+    Route::get('restaurants/getcategory/{id}','RestaurantController@getCategory');
+
     Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('categories', 'CategoryController')->except([
         'show'

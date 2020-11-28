@@ -22,6 +22,8 @@ use App\Http\Requests\CreateRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\CuisineRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\FoodRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserRepository;
@@ -29,6 +31,8 @@ use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
+use App\Models\Food;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class RestaurantController extends Controller
@@ -53,8 +57,17 @@ class RestaurantController extends Controller
      * @var CuisineRepository
      */
     private $cuisineRepository;
+    /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
 
-    public function __construct(RestaurantRepository $restaurantRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo, UserRepository $userRepo, CuisineRepository $cuisineRepository)
+    /**
+     * @var FoodRepository
+     */
+    private $foodRepository;
+
+    public function __construct(RestaurantRepository $restaurantRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo, UserRepository $userRepo, CuisineRepository $cuisineRepository, CategoryRepository $categoryRepository, FoodRepository $foodRepository)
     {
         parent::__construct();
         $this->restaurantRepository = $restaurantRepo;
@@ -62,6 +75,8 @@ class RestaurantController extends Controller
         $this->uploadRepository = $uploadRepo;
         $this->userRepository = $userRepo;
         $this->cuisineRepository = $cuisineRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->foodRepository = $foodRepository;
     }
 
     /**
@@ -97,15 +112,21 @@ class RestaurantController extends Controller
         $user = $this->userRepository->getByCriteria(new ManagersCriteria())->pluck('name', 'id');
         $drivers = $this->userRepository->getByCriteria(new DriversCriteria())->pluck('name', 'id');
         $cuisine = $this->cuisineRepository->pluck('name', 'id');
+        $category = $this->categoryRepository->pluck('name', 'id');
+        $food = $this->foodRepository->pluck('name', 'id');
+
         $usersSelected = [];
         $driversSelected = [];
         $cuisinesSelected = [];
+        $categoriesSelected = [];
+        $foodsSelected = [];
+
         $hasCustomField = in_array($this->restaurantRepository->model(), setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
             $html = generateCustomField($customFields);
         }
-        return view('restaurants.create')->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected);
+        return view('restaurants.create')->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected)->with('category', $category)->with('categoriesSelected', $categoriesSelected)->with('food', $food)->with('foodsSelected', $foodsSelected);
     }
 
     /**
@@ -186,11 +207,12 @@ class RestaurantController extends Controller
         }
         $drivers = $this->userRepository->getByCriteria(new DriversCriteria())->pluck('name', 'id');
         $cuisine = $this->cuisineRepository->pluck('name', 'id');
-
+        $category = $this->categoryRepository->pluck('name', 'id');
 
         $usersSelected = $restaurant->users()->pluck('users.id')->toArray();
         $driversSelected = $restaurant->drivers()->pluck('users.id')->toArray();
         $cuisinesSelected = $restaurant->cuisines()->pluck('cuisines.id')->toArray();
+        $categoriesSelected = $restaurant->categories()->pluck('categories.id')->toArray();
 
         $customFieldsValues = $restaurant->customFieldsValues()->with('customField')->get();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
@@ -199,7 +221,7 @@ class RestaurantController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-        return view('restaurants.edit')->with('restaurant', $restaurant)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected);
+        return view('restaurants.edit')->with('restaurant', $restaurant)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected)->with('category', $category)->with('categoriesSelected', $categoriesSelected);
     }
 
     /**
@@ -264,6 +286,8 @@ class RestaurantController extends Controller
                 return redirect(route('restaurants.index'));
             }
 
+            $data = DB::delete('delete from restaurant_categories where restaurant_id  = ?',[$id]);
+
             $this->restaurantRepository->delete($id);
 
             Flash::success(__('lang.deleted_successfully', ['operator' => __('lang.restaurant')]));
@@ -288,5 +312,14 @@ class RestaurantController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
+    }
+
+
+    public function getCategory($id)
+    {
+        
+        $data = explode(",",$id);
+        $brands = Food::whereIn('category_id',$data)->pluck('name','id');
+        return json_encode($brands);
     }
 }

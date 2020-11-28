@@ -20,6 +20,24 @@
             <div class="form-text text-muted">{{ trans("lang.restaurant_cuisines_help") }}</div>
         </div>
     </div>
+    <!-- Categories Field -->
+    <div class="form-group row ">
+        {!! Form::label('categories[]', trans("lang.restaurant_menucategory"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('categories[]', $category, $categoriesSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple' , 'id' => 'cat']) !!}
+            <div class="form-text text-muted">{{ trans("lang.restaurant_menucategory_help") }}</div>
+        </div>
+    </div>
+
+    <!-- Foods Field -->
+    <div class="form-group row ">
+        {!! Form::label('foods[]', trans("lang.restaurant_menus"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('foods[]', $food, $foodsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple' , 'id' => 'foods']) !!}
+            <div class="form-text text-muted">{{ trans("lang.restaurant_menus_help") }}</div>
+        </div>
+    </div>
+
     @hasanyrole('admin|manager')
     <!-- Users Field -->
     <div class="form-group row ">
@@ -200,6 +218,31 @@
             dz_var15671147011688676454ble[0].mockFile = var15671147011688676454ble;
             dropzoneFields['image'] = dz_var15671147011688676454ble;
         </script>
+         <script type="text/javascript">
+
+              $('#cat').on('change', function() {
+                var url = "{{url('http://localhost/salkarafooddelivery/public/restaurants')}}";
+                $('#foods').empty();
+                var id = $('#cat').val();
+                $('#foods').html('<option selected="selected" value="">Loading...</option>');
+                var url = url + '/getcategory/'+id;
+                console.log(url);
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        //console.log(data);
+                        //$('#foods').html('<option selected="selected" value="">Select Food</option>');
+                        $.each(data, function(key, value) {
+
+                            $('#foods').append('<option value="'+key+'">'+value+'</option>');
+                        });
+
+                    }
+                });
+              });
+            </script>
 @endprepend
 
 <!-- Description Field -->

@@ -82,6 +82,16 @@
     dropzoneFields['image'] = dz_var15866134771240834480ble;
 </script>
 @endprepend
+
+<!-- Restaurants Cuisine -->
+<div class="form-group row ">
+  {!! Form::label('restaurants[]', trans("lang.cuisine_restaurants"),['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    {!! Form::select('restaurants[]', $restaurant, $restaurantsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
+    <div class="form-text text-muted">{{ trans("lang.cuisine_restaurants_help") }}</div>
+  </div>
+</div>
+
 </div>
 @if($customFields)
 <div class="clearfix"></div>

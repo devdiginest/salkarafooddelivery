@@ -26,6 +26,7 @@ use Spatie\MediaLibrary\Models\Media;
  * @property \Illuminate\Database\Eloquent\Collection RestaurantsReview
  * @property \Illuminate\Database\Eloquent\Collection[] discountables
  * @property \Illuminate\Database\Eloquent\Collection[] cuisines
+ * @property \Illuminate\Database\Eloquent\Collection[] categories
  * @property \Illuminate\Database\Eloquent\Collection[] User
  * @property \Illuminate\Database\Eloquent\Collection[] Restaurant
  * @property string name
@@ -62,7 +63,7 @@ class Restaurant extends Model implements HasMedia
         'longitude',
         'phone',
         'mobile',
-        'admin_commission',
+        // 'admin_commission',
         'delivery_fee',
         'default_tax',
         'delivery_range',
@@ -251,6 +252,14 @@ class Restaurant extends Model implements HasMedia
     public function cuisines()
     {
         return $this->belongsToMany(\App\Models\Cuisine::class, 'restaurant_cuisines');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function categories()
+    {
+        return $this->belongsToMany(\App\Models\Category::class, 'restaurant_categories');
     }
 
     public function discountables()

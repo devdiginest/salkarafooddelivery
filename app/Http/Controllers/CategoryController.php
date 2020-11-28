@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\UploadRepository;
+use App\Repositories\RestaurantRepository;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -29,12 +30,18 @@ class CategoryController extends Controller
      */
     private $uploadRepository;
 
-    public function __construct(CategoryRepository $categoryRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo)
+    /**
+     * @var RestaurantRepository
+     */
+    private $restaurantRepository;
+
+    public function __construct(CategoryRepository $categoryRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo, RestaurantRepository $restaurantRepo)
     {
         parent::__construct();
         $this->categoryRepository = $categoryRepo;
         $this->customFieldRepository = $customFieldRepo;
         $this->uploadRepository = $uploadRepo;
+        $this->restaurantRepository = $restaurantRepo;
     }
 
     /**
@@ -56,13 +63,15 @@ class CategoryController extends Controller
     public function create()
     {
 
-
+        $restaurant = $this->restaurantRepository->pluck('name', 'id');
+        $restaurantsSelected = [];
+        
         $hasCustomField = in_array($this->categoryRepository->model(), setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->categoryRepository->model());
             $html = generateCustomField($customFields);
         }
-        return view('categories.create')->with("customFields", isset($html) ? $html : false);
+        return view('categories.create')->with("customFields", isset($html) ? $html : false)->with("restaurant", $restaurant)->with("restaurantsSelected", $restaurantsSelected);
     }
 
     /**
@@ -123,7 +132,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categoryRepository->findWithoutFail($id);
-
+        $restaurant = $this->restaurantRepository->pluck('name', 'id');
+        $restaurantsSelected = $category->restaurants()->pluck('restaurants.id')->toArray();
 
         if (empty($category)) {
             Flash::error(__('lang.not_found', ['operator' => __('lang.category')]));
@@ -137,7 +147,7 @@ class CategoryController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-        return view('categories.edit')->with('category', $category)->with("customFields", isset($html) ? $html : false);
+        return view('categories.edit')->with('category', $category)->with("customFields", isset($html) ? $html : false)->with("restaurant", $restaurant)->with("restaurantsSelected", $restaurantsSelected);
     }
 
     /**

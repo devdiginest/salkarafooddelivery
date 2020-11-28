@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\Models\Media;
  * @version April 11, 2020, 1:57 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection Food
+ * @property \Illuminate\Database\Eloquent\Collection restaurant
  * @property \Illuminate\Database\Eloquent\Collection[] discountables
  * @property string name
  * @property string description
@@ -144,9 +145,25 @@ class Category extends Model implements HasMedia
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
+    // public function restaurants()
+    // {
+    //     return $this->belongsToMany(\App\Models\Restaurant::class, 'foods');
+    // }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
     public function restaurants()
     {
-        return $this->belongsToMany(\App\Models\Restaurant::class, 'foods');
+        return $this->belongsToMany(\App\Models\Restaurant::class, 'restaurant_categories');
+    }
+
+        /**
+    * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function getRestaurantsAttribute()
+    {
+        return $this->restaurants()->get(['restaurants.id', 'restaurants.name']);
     }
 
     public function discountables()
