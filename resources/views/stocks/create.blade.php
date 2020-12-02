@@ -50,13 +50,12 @@
         <form method="post" action="{{url('/stocks')}}">
           @csrf
           <div class="form-group">
-            <label for="foodname"> Food Name </label>
-            {!! Form::select('foods', $food, null, ['class' => 'form-control', 'placeholder'=>  trans("lang.stock_name_placeholder")]) !!}
-            <!-- <input type="text" class="form-control" name="foodname" /> -->
+            <label for="restname"> Restaurant Name </label>
+            {!! Form::select('restaurants', $restaurant, null, ['class' => 'form-control', 'id' => 'restname', 'placeholder'=>  trans("lang.stock_name_placeholder")]) !!}
           </div>
           <div class="form-group">
-            <label for="restname"> Restaurant Name </label>
-            {!! Form::select('restaurants', $restaurant, null, ['class' => 'form-control', 'placeholder'=>  trans("lang.stock_name_placeholder")]) !!}
+            <label for="foodname"> Food Name </label>
+            {!! Form::select('foods', $food, null, ['class' => 'form-control', 'id' => 'foods', 'placeholder'=>  trans("lang.stock_name_placeholder")]) !!}
           </div>
           <div class="form-group">
             <label for="quantity"> Quantity </label>
@@ -75,6 +74,39 @@
 </div>
 @endsection
 @push('scripts_lib')
+<script type="text/javascript">
+
+              $('#restname').on('change', function() {
+                var url = "{{url('/stocks')}}";
+                $('#foods').empty();
+                var id = $('#restname').val();
+                // $('#foods').html('<option selected="selected" value="">Loading...</option>');
+                var url = url + '/getfood/'+id;
+                //console.log(url);
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "json",
+                    success:function (response) {
+                    var len = 0;
+                    if (response.data != null) {
+                        len = response.data.length;
+                    }
+
+                    if (len>0) {
+                        for (var i = 0; i<len; i++) {
+                             var id = response.data[i].id;
+                             var name = response.data[i].name;
+
+                             var option = "<option value='"+id+"'>"+name+"</option>"; 
+
+                             $("#foods").append(option);
+                        }
+                    }
+                }
+                });
+              });
+            </script>
 <!-- iCheck -->
 <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
 <!-- select2 -->

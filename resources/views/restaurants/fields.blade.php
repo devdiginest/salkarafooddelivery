@@ -221,7 +221,7 @@
          <script type="text/javascript">
 
               $('#cat').on('change', function() {
-                var url = "{{url('http://localhost/salkarafooddelivery/public/restaurants')}}";
+                var url = "{{url('/restaurants')}}";
                 $('#foods').empty();
                 var id = $('#cat').val();
                 // $('#foods').html('<option selected="selected" value="">Loading...</option>');
