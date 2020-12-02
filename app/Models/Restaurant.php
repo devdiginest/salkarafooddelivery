@@ -209,10 +209,10 @@ class Restaurant extends Model implements HasMedia
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function foods()
-    {
-        return $this->hasMany(\App\Models\Food::class, 'restaurant_id');
-    }
+    // public function foods()
+    // {
+    //     return $this->hasMany(\App\Models\Food::class, 'restaurant_id');
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -260,6 +260,14 @@ class Restaurant extends Model implements HasMedia
     public function categories()
     {
         return $this->belongsToMany(\App\Models\Category::class, 'restaurant_categories');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function foods()
+    {
+        return $this->belongsToMany(\App\Models\Food::class, 'restaurant_foods');
     }
 
     public function discountables()

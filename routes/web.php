@@ -94,6 +94,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('restaurants/getcategory/{id}','RestaurantController@getCategory');
 
+    Route::get('/stocks', 'StockController@index');
+    Route::get('/stocks/create', 'StockController@create');
+    Route::post('/stocks', 'StockController@store');
+    Route::get('/stocks/{stock}', 'StockController@show');
+    Route::get('/stocks/{stock}/edit', 'StockController@edit');
+    Route::put('/stocks/{stock}', 'StockController@update');
+    Route::delete('/stocks/{stock}', 'StockController@destroy');
+
     Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('categories', 'CategoryController')->except([
         'show'
@@ -189,5 +197,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('slides', 'SlideController')->except([
         'show'
     ]);
+
+    
 });
 

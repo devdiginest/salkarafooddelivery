@@ -52,7 +52,7 @@ class Food extends Model implements HasMedia
     public static $rules = [
         'name' => 'required',
         'price' => 'required|numeric|min:0',
-        'restaurant_id' => 'required|exists:restaurants,id',
+        // 'restaurant_id' => 'required|exists:restaurants,id',
         'category_id' => 'required|exists:categories,id'
     ];
 
@@ -68,7 +68,7 @@ class Food extends Model implements HasMedia
         'unit',
         'featured',
         'deliverable',
-        'restaurant_id',
+        // 'restaurant_id',
         'category_id'
     ];
     /**
@@ -88,7 +88,7 @@ class Food extends Model implements HasMedia
         'unit' => 'string',
         'featured' => 'boolean',
         'deliverable' => 'boolean',
-        'restaurant_id' => 'integer',
+        // 'restaurant_id' => 'integer',
         'category_id' => 'integer'
     ];
     /**
@@ -218,6 +218,14 @@ class Food extends Model implements HasMedia
     public function restaurant()
     {
         return $this->belongsTo(\App\Models\Restaurant::class, 'restaurant_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function restaurants()
+    {
+        return $this->belongsToMany(\App\Models\Restaurant::class, 'restaurant_foods');
     }
 
     /**
