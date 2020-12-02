@@ -61,6 +61,13 @@
             <label for="quantity"> Quantity </label>
             <input type="text" class="form-control" name="quantity" />
           </div>
+          <div class="form-group">
+            <label for="status"> Status </label>
+            <select name="status" class="form-control">
+              <option value="0">Yes</option>
+              <option value="1">No</option>
+            </select>
+          </div>
           <!-- Submit Field -->
           <div class="form-group col-12 text-right">
               <button type="submit" class="btn btn-{{setting('theme_color')}}"><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.stock')}}</button>

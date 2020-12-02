@@ -62,6 +62,18 @@
             <label for="quantity"> Quantity </label>
             {{ Form::text('quantity', $stock->quantity, ['class' => 'form-control']) }}
           </div>
+          <div class="form-group">
+            <label for="status"> Status </label>
+            <select name="status" class="form-control">
+                @if($stock->status =='0')         
+                    <option value="0" selected>Yes</option>             
+                    <option value="1">No</option>             
+                @else
+                    <option value="0">Yes</option>             
+                    <option value="1" selected>No</option>        
+                @endif
+            </select>
+          </div>
           <!-- Submit Field -->
           <div class="form-group col-12 text-right">
               <button type="submit" class="btn btn-{{setting('theme_color')}}"><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.stock')}}</button>
