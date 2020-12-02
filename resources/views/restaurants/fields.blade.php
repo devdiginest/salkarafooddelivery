@@ -221,7 +221,7 @@
          <script type="text/javascript">
 
               $('#cat').on('change', function() {
-                var url = "{{url('http://localhost/salkarafooddelivery/public/restaurants')}}";
+                var url = "{{url('http://fooddelivery.mysalkara.com/public/restaurants')}}";
                 $('#foods').empty();
                 var id = $('#cat').val();
                 $('#foods').html('<option selected="selected" value="">Loading...</option>');
@@ -233,7 +233,7 @@
                     dataType: "json",
                     success:function(data) {
                         //console.log(data);
-                        //$('#foods').html('<option selected="selected" value="">Select Food</option>');
+                        $('#foods').html('<option selected="selected" value="">Select Food</option>');
                         $.each(data, function(key, value) {
 
                             $('#foods').append('<option value="'+key+'">'+value+'</option>');
