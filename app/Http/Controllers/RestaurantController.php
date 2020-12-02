@@ -208,11 +208,13 @@ class RestaurantController extends Controller
         $drivers = $this->userRepository->getByCriteria(new DriversCriteria())->pluck('name', 'id');
         $cuisine = $this->cuisineRepository->pluck('name', 'id');
         $category = $this->categoryRepository->pluck('name', 'id');
+        $food = $this->foodRepository->pluck('name', 'id');
 
         $usersSelected = $restaurant->users()->pluck('users.id')->toArray();
         $driversSelected = $restaurant->drivers()->pluck('users.id')->toArray();
         $cuisinesSelected = $restaurant->cuisines()->pluck('cuisines.id')->toArray();
         $categoriesSelected = $restaurant->categories()->pluck('categories.id')->toArray();
+        $foodsSelected = $restaurant->foods()->pluck('foods.id')->toArray();
 
         $customFieldsValues = $restaurant->customFieldsValues()->with('customField')->get();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
@@ -221,7 +223,7 @@ class RestaurantController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-        return view('restaurants.edit')->with('restaurant', $restaurant)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected)->with('category', $category)->with('categoriesSelected', $categoriesSelected);
+        return view('restaurants.edit')->with('restaurant', $restaurant)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected)->with('category', $category)->with('categoriesSelected', $categoriesSelected)->with('food', $food)->with('foodsSelected', $foodsSelected);
     }
 
     /**
@@ -313,6 +315,11 @@ class RestaurantController extends Controller
             Log::error($e->getMessage());
         }
     }
+
+    /**
+     * Get foods related with specific category
+     * @param Request $request
+     */
 
 
     public function getCategory($id)

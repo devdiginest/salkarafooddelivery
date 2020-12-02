@@ -22,6 +22,7 @@ use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class FoodController extends Controller
@@ -233,6 +234,8 @@ class FoodController extends Controller
 
                 return redirect(route('foods.index'));
             }
+
+            DB::delete('delete from restaurant_foods where restaurant_id  = ?',[$id]);
 
             $this->foodRepository->delete($id);
 

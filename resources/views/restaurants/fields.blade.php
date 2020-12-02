@@ -224,7 +224,7 @@
                 var url = "{{url('http://localhost/salkarafooddelivery/public/restaurants')}}";
                 $('#foods').empty();
                 var id = $('#cat').val();
-                $('#foods').html('<option selected="selected" value="">Loading...</option>');
+                // $('#foods').html('<option selected="selected" value="">Loading...</option>');
                 var url = url + '/getcategory/'+id;
                 console.log(url);
                 $.ajax({
