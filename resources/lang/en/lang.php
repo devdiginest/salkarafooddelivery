@@ -558,6 +558,7 @@ return [
     'food_weight_help' => 'Insert Weight of this food default unit is gramme (g)',
     'food_weight_placeholder' => 'Insert Weight',
     'stock' => 'Stock',
+    'stock_manage' => 'Stock Manage',
     'stock_table' => 'Stock List',
     'stock_create' => 'Add Stock',
     'stock_edit' => 'Edit Stock',

@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stocks/{stock}/edit', 'StockController@edit');
     Route::put('/stocks/{stock}', 'StockController@update');
     Route::delete('/stocks/{stock}', 'StockController@destroy');
+    Route::get('/stocks/getfood/{id}','StockController@getFood');
 
     Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('categories', 'CategoryController')->except([

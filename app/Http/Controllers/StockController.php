@@ -171,4 +171,15 @@ class StockController extends Controller
 
         return redirect('/stocks');
     }
+
+    public function getFood($id)
+    {
+       $stocks = DB::table('restaurant_foods')
+                ->select('restaurant_foods.food_id','foods.name')
+                ->join('foods','foods.id','=','restaurant_foods.food_id')
+                ->where('restaurant_foods.restaurant_id',$id)
+                ->get();
+       
+       return response()->json(['data' => $stocks]);
+    }
 }
