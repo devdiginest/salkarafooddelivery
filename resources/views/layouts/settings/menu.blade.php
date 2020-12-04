@@ -1,4 +1,8 @@
-<div class="card {{ Request::is('users*') || Request::is('settings/permissions*') || Request::is('settings/roles*') ? '' : 'collapsed-card' }}">
+@if (Request::is('users*'))
+    
+@else
+
+<div class="card {{ Request::is('settings/permissions*') || Request::is('settings/roles*') ? '' : 'collapsed-card' }}">
     <div class="card-header">
         <h3 class="card-title">{{trans('lang.permission_menu')}}</h3>
 
@@ -147,3 +151,4 @@
         </ul>
     </div>
 </div>
+@endif

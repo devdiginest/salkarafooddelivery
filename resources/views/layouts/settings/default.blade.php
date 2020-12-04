@@ -25,12 +25,18 @@
     @include('flash::message')
     <div class="clearfix"></div>
     <div class="row">
+        @if (Request::is('users*'))
+        <div class="col-md-12">
+            @yield('settings_content')
+        </div>
+        @else
         <div class="col-md-3">
             @include('layouts.settings.menu')
         </div>
         <div class="col-md-9">
             @yield('settings_content')
         </div>
+        @endif
     </div>
 </div>
 @endsection

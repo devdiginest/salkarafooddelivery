@@ -25,6 +25,7 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
+        
         return $dataTable
             ->editColumn('updated_at', function ($user) {
                 return getDateColumn($user, 'updated_at');
@@ -37,6 +38,9 @@ class UserDataTable extends DataTable
             })
             ->editColumn('avatar', function ($user) {
                 return getMediaColumn($user, 'avatar', 'img-circle elevation-2');
+            })
+            ->editColumn('restaurant', function ($user) {
+                return getArrayColumn($user->restaurants,'name');
             })
             ->addColumn('action', 'settings.users.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
@@ -101,6 +105,12 @@ class UserDataTable extends DataTable
             [
                 'data' => 'role',
                 'title' => trans('lang.user_role_id'),
+                'orderable' => false, 'searchable' => false,
+
+            ],
+            [
+                'data' => 'restaurant',
+                'title' => trans('lang.cuisine_restaurants'),
                 'orderable' => false, 'searchable' => false,
 
             ],
