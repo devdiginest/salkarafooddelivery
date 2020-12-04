@@ -1008,6 +1008,7 @@ return [
     'dashboard_total_earnings' => 'Total earnings',
     'dashboard_after taxes' => 'After taxes',
     'dashboard_total_clients' => 'Total clients',
+    'dashboard_total_users' => 'Total users',
     'dashboard_view_all_payments' => 'All payments',
     'dashboard_earning_over_time' => 'Earning over time',
     'dashboard_this_year' => 'This year',

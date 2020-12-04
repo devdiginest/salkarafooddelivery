@@ -76,7 +76,7 @@
                     <div class="inner">
                         <h3>{{$membersCount}}</h3>
 
-                        <p>{{trans('lang.dashboard_total_clients')}}</p>
+                        <p>{{trans('lang.dashboard_total_users')}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-group"></i>

@@ -6,12 +6,12 @@
     </li>
 @endcan
 
-@can('favorites.index')
+<!-- @can('favorites.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('favorites*') ? 'active' : '' }}" href="{!! route('favorites.index') !!}">@if($icons)
                 <i class="nav-icon fa fa-heart"></i>@endif<p>{{trans('lang.favorite_plural')}}</p></a>
     </li>
-@endcan
+@endcan -->
 
 <li class="nav-header">{{trans('lang.app_management')}}</li>
 
@@ -111,12 +111,12 @@
             @endcan
 
 
-            @can('nutrition.index')
+           <!--  @can('nutrition.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('nutrition*') ? 'active' : '' }}" href="{!! route('nutrition.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-tasks"></i>@endif<p>{{trans('lang.nutrition_plural')}}</p></a>
                 </li>
-            @endcan
+            @endcan -->
 
         </ul>
     </li>
@@ -137,7 +137,7 @@
                             <i class="nav-icon fa fa-shopping-basket"></i>@endif<p>{{trans('lang.order_plural')}}</p></a>
                 </li>
             @endcan
-            @can('orderStatuses.index')
+            <!-- @can('orderStatuses.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('orderStatuses*') ? 'active' : '' }}" href="{!! route('orderStatuses.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-server"></i>@endif<p>{{trans('lang.order_status_plural')}}</p></a>
@@ -149,7 +149,7 @@
                     <a class="nav-link {{ Request::is('deliveryAddresses*') ? 'active' : '' }}" href="{!! route('deliveryAddresses.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-map"></i>@endif<p>{{trans('lang.delivery_address_plural')}}</p></a>
                 </li>
-            @endcan
+            @endcan -->
 
         </ul>
     </li>
@@ -167,7 +167,7 @@
     </li>
 @endcan
 
-@can('faqs.index')
+<!-- @can('faqs.index')
     <li class="nav-item has-treeview {{ Request::is('faqCategories*') || Request::is('faqs*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ Request::is('faqs*') || Request::is('faqCategories*') ? 'active' : '' }}"> @if($icons)
                 <i class="nav-icon fa fa-support"></i>@endif
@@ -191,7 +191,7 @@
             @endcan
         </ul>
     </li>
-@endcan
+@endcan -->
 
 <li class="nav-header">{{trans('lang.app_setting')}}</li>
 @can('medias')
