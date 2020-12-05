@@ -22,6 +22,7 @@ use Eloquent as Model;
  * @property integer quantity
  * @property integer food_id
  * @property integer order_id
+ * @property integer restaurant_id
  */
 class FoodOrder extends Model
 {
@@ -34,7 +35,8 @@ class FoodOrder extends Model
         'price',
         'quantity',
         'food_id',
-        'order_id'
+        'order_id',
+        'restaurant_id'
     ];
 
     /**
@@ -46,7 +48,8 @@ class FoodOrder extends Model
         'price' => 'double',
         'quantity' => 'integer',
         'food_id' => 'integer',
-        'order_id' => 'integer'
+        'order_id' => 'integer',
+        'restaurant_id' => 'integer'
     ];
 
     /**
@@ -57,7 +60,8 @@ class FoodOrder extends Model
     public static $rules = [
         'price' => 'required',
         'food_id' => 'required|exists:foods,id',
-        'order_id' => 'required|exists:orders,id'
+        'order_id' => 'required|exists:orders,id',
+        'restaurant_id' => 'required|exists:restaurants,id'
     ];
 
     /**
@@ -110,5 +114,13 @@ class FoodOrder extends Model
     public function order()
     {
         return $this->belongsTo(\App\Models\Order::class, 'order_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function restaurant()
+    {
+        return $this->belongsTo(\App\Models\Restaurant::class, 'restaurant_id', 'id');
     }
 }

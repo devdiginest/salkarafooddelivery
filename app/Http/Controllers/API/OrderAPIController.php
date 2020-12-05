@@ -176,6 +176,7 @@ class OrderAPIController extends Controller
                 }
                 foreach ($input['foods'] as $foodOrder) {
                     $foodOrder['order_id'] = $order->id;
+                    $foodOrder['restaurant_id'] = $input['restaurant_id'];
                     $amount += $foodOrder['price'] * $foodOrder['quantity'];
                     $this->foodOrderRepository->create($foodOrder);
                 }
