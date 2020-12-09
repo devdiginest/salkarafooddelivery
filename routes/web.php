@@ -35,6 +35,7 @@ Route::get('firebase/sw-js', 'AppSettingController@initFirebase');
 
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
 Route::middleware('auth')->group(function () {
+
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
@@ -198,6 +199,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('slides', 'SlideController')->except([
         'show'
     ]);
+
+    Route::get('/reports', 'ReportController@index');
+    Route::get('/reports/restaurants', 'ReportController@restaurants');
+    Route::get('/reports/drivers', 'ReportController@drivers');
+    Route::get('/reports/area', 'ReportController@areaWise');
+    Route::get('/reports/takeaway', 'ReportController@takeAway');
+    Route::get('/reports/customers', 'ReportController@customers');
 
     
 });

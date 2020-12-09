@@ -137,14 +137,14 @@
                             <i class="nav-icon fa fa-shopping-basket"></i>@endif<p>{{trans('lang.order_plural')}}</p></a>
                 </li>
             @endcan
-            <!-- @can('orderStatuses.index')
+            @can('orderStatuses.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('orderStatuses*') ? 'active' : '' }}" href="{!! route('orderStatuses.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-server"></i>@endif<p>{{trans('lang.order_status_plural')}}</p></a>
                 </li>
             @endcan
 
-            @can('deliveryAddresses.index')
+            <!-- @can('deliveryAddresses.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('deliveryAddresses*') ? 'active' : '' }}" href="{!! route('deliveryAddresses.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-map"></i>@endif<p>{{trans('lang.delivery_address_plural')}}</p></a>
@@ -166,6 +166,9 @@
         <a class="nav-link {{ Request::is('drivers*') ? 'active' : '' }}" href="{!! route('drivers.index') !!}">@if($icons)<i class="nav-icon fa fa-car"></i>@endif<p>{{trans('lang.driver_plural')}} </p></a>
     </li>
 @endcan
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('reports*') ? 'active' : '' }}" href="{{url('/reports')}}">@if($icons)<i class="nav-icon fa fa-th-large"></i>@endif<p>{{trans('lang.report_plural')}} </p></a>
+    </li>
 
 <!-- @can('faqs.index')
     <li class="nav-item has-treeview {{ Request::is('faqCategories*') || Request::is('faqs*') ? 'menu-open' : '' }}">

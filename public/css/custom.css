@@ -389,6 +389,10 @@ nav.nmain-header .brand-text{
     box-shadow: none;
 }
 
+.opacity{
+    opacity: 0 !important;
+}
+
 @media (min-width: 1440px) {
     .container {
         max-width: 1550px;
