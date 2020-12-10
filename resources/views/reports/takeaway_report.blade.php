@@ -6,14 +6,14 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{trans('lang.customer_plural')}}<small class="ml-3 mr-3">|</small><small>{{trans('lang.report_customer_desc')}}</small></h1>
+        <h1 class="m-0 text-dark">{{trans('lang.report_plural')}}<small class="ml-3 mr-3">|</small><small>{{trans('lang.report_takeaway_desc')}}</small></h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('lang.dashboard')}}</a></li>
           <li class="breadcrumb-item"><a href="{{url('/reports')}}">{{trans('lang.report_plural')}}</a>
           </li>
-          <li class="breadcrumb-item active">{{trans('lang.report_customer_desc')}}</li>
+          <li class="breadcrumb-item active">{{trans('lang.report_takeaway_desc')}}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -35,21 +35,21 @@
     </div>
     <div class="card-body">
       <form class="offset-3">
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="start_date">Start Date</label>
-            <input type="datetime-local" class="form-control" id="start_date">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="start_date">Start Date</label>
+              <input type="datetime-local" class="form-control" id="start_date">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="end_date">End Date</label>
+              <input type="datetime-local" class="form-control" id="end_date">
+            </div>
           </div>
-          <div class="form-group col-md-4">
-            <label for="end_date">End Date</label>
-            <input type="datetime-local" class="form-control" id="end_date">
+          <div class="offset-3">
+            <button type="button" class="btn btn-primary" id="generate">Generate</button>
+            <button type="button" class="btn btn-danger" id="reset">Reset</button>
           </div>
-        </div>
-        <div class="offset-3">
-          <button type="button" class="btn btn-primary" id="generate">Generate</button>
-          <button type="button" class="btn btn-danger" id="reset">Reset</button>
-        </div>
-      </form>
+        </form>
       @include('reports.rest_table')
       @push('scripts_lib')
       <script>

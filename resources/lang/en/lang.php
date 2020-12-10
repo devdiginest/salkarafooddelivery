@@ -1184,5 +1184,7 @@ return [
     'report_restaurant_desc' => 'All Restaurant Reports',
     'report_driver_desc' => 'All Driver Reports',
     'report_customer_desc' => 'All Customer Reports',
+    'report_area_desc' => 'Area Wise Reports',
+    'report_takeaway_desc' => 'All Take Away Reports',
     'date' => 'Date',
 ];

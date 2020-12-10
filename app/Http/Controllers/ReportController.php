@@ -10,6 +10,8 @@ use App\Repositories\DriverRepository;
 use App\DataTables\RestaurantReportDataTable;
 use App\DataTables\DriverReportDataTable;
 use App\DataTables\CustomerReportDataTable;
+use App\DataTables\AreaReportDataTable;
+use App\DataTables\TakeAwayReportDataTable;
 
 class ReportController extends Controller
 {
@@ -46,14 +48,14 @@ class ReportController extends Controller
         return $driverreportDataTable->render('reports.driver_report');
     }
 
-    public function areaWise()
+    public function areaWise(AreaReportDataTable $areareportDataTable)
     {
-        echo "reached area controller";
+        return $areareportDataTable->render('reports.area_report');
     }
     
-    public function takeAway()
+    public function takeAway(TakeAwayReportDataTable $takeawayreportDataTable)
     {
-        echo "reached takeaway controller";
+        return $takeawayreportDataTable->render('reports.takeaway_report');
     }
 
     public function customers(CustomerReportDataTable $customerreportDataTable)

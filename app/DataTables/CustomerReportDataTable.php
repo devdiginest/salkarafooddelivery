@@ -15,6 +15,8 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use App\Models\Order;
+use Illuminate\Support\Carbon;
 
 class CustomerReportDataTable extends DataTable
 {
@@ -34,9 +36,19 @@ class CustomerReportDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
+        
         return $dataTable
             ->editColumn('email', function ($user) {
+                //dd($user);
                 return getEmailColumn($user, 'email');
+            })
+            ->editColumn('orders', function ($user) {
+                $orderlist = Order::where('user_id', '=', $user->user_id)->get();
+                $orderCount = $orderlist->count();
+                return $orderCount;
+            })
+            ->editColumn('date', function ($driver) {
+                return getDateColumn($driver, 'created_at');
             })
             ->rawColumns($columns);
     }
@@ -58,6 +70,15 @@ class CustomerReportDataTable extends DataTable
                 'data' => 'email',
                 'title' => trans('lang.user_email'),
 
+            ],
+            [
+                'data' => 'orders',
+                'title' => trans('lang.driver_total_orders'),
+            ],
+            [
+                'data' => 'created_at',
+                'title' => trans('lang.date'),
+                'searchable' => false,
             ]
         ];
 
@@ -86,7 +107,24 @@ class CustomerReportDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('roles');
+        $start_date = $this->request()->get('start_date');
+        $end_date = $this->request()->get('end_date');
+
+       $query = $model->newQuery()
+                ->with('roles')
+                ->join('orders','orders.user_id', '=', 'users.id')
+                ->whereHas(
+                    'roles', function($q){
+                        $q->where('name', 'client');
+                    }
+                );
+        if (!empty($start_date) && !empty($end_date)) {
+
+            $start_date = Carbon::parse($start_date);
+            $end_date = Carbon::parse($end_date);
+            $query = $query->whereBetween('orders.created_at',[$start_date,$end_date]);
+        }
+        return $query;
     }
 
     /**
@@ -127,6 +165,6 @@ class CustomerReportDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'driversdatatable_' . time();
+        return 'customersdatatable_' . time();
     }
 }
