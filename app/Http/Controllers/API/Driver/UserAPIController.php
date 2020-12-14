@@ -2,7 +2,7 @@
 /**
  * File name: UserAPIController.php
  * Last modified: 2020.05.21 at 17:25:21
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: Diginest Solutions
  * Copyright (c) 2020
  */
 

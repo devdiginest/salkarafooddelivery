@@ -14,7 +14,7 @@
                             text: data.message,type: 'error', confirmButtonClass: 'btn-danger'});"
     ]) !!}
 
-    <div class="dropdown">
+    {{-- <div class="dropdown">
         <a class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-cog"></i> </a>
         <div class="dropdown-menu">
@@ -24,7 +24,7 @@
             <a onclick="return swal({title: '{{trans('lang.error')}}'});" class='dropdown-item' href="{{ route('users.profile') }}"><i class="fa fa-user mr-1"></i> {{trans('lang.user_profile')}} </a>
 
         </div>
-    </div>
+    </div> --}}
 
 </div>
 {!! Form::close() !!}

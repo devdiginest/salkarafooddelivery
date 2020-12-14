@@ -12,7 +12,7 @@
     <li class="nav-item">
         <a class="nav-link pt-1" id="refreshDatatable" href="#"><i class="fa fa-refresh"></i> {{trans('lang.refresh')}}</a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link pt-1" id="printDatatable" href="#"><i class="fa fa-print"></i> {{trans('lang.print')}}</a>
     </li>
     <li class="nav-item">
@@ -26,7 +26,7 @@
                 <a class="dropdown-item text-bold" href="#" data-column="{{$key}}"> <i class="fa fa-check mr-2"></i>{{$item->title}}</a>
             @endforeach
         </div>
-    </li>
+    </li> --}}
     {{--@if(!isset($filtered))--}}
     {{--<li class="nav-item">--}}
         {{--<div style="min-width: 200px;" id="filter" class="ml-auto pb-2 mx-2">--}}

@@ -1,8 +1,8 @@
 <?php
 /**
  * File name: UserController.php
- * Last modified: 2020.06.11 at 16:10:52
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Last modified: 2020.12.14 at 16:10:52
+ * Author: Diginest Solutions
  * Copyright (c) 2020
  */
 

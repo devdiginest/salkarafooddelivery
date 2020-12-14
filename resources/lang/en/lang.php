@@ -896,6 +896,7 @@ return [
     'user_api_token_help' => 'Insert Api Token',
     'user_api_token_placeholder' => 'Insert Api Token',
     'user_avatar' => 'Avatar',
+    'user_image' => 'Image',
     'user_avatar_help' => 'Upload avatar image or select it from media',
     'user_bio' => 'Short Biography',
     'user_bio_help' => 'Insert Biography',

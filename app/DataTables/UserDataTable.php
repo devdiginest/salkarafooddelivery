@@ -54,7 +54,9 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('roles');
+        return $model->newQuery()->with('roles')->whereHas('roles', function($q) {
+            $q->where('name', '!=', 'client');
+        });
     }
 
     /**
@@ -88,7 +90,7 @@ class UserDataTable extends DataTable
         $columns = [
             [
                 'data' => 'avatar',
-                'title' => trans('lang.user_avatar'),
+                'title' => trans('lang.user_image'),
                 'orderable' => false, 'searchable' => false,
 
             ],
