@@ -74,7 +74,7 @@
     <li class="nav-item has-treeview {{ Request::is('foods*') || Request::is('extra*') || Request::is('foodReviews*') || Request::is('nutrition*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ Request::is('foods*') || Request::is('extra*') || Request::is('foodReviews*') || Request::is('nutrition*') ? 'active' : '' }}"> @if($icons)
                 <i class="nav-icon fa fa-fire"></i>@endif
-            <p>{{trans('lang.food_plural')}} <i class="right fa fa-angle-left"></i>
+            <p>{{trans('lang.restaurant_menu')}} <i class="right fa fa-angle-left"></i>
             </p>
         </a>
         <ul class="nav nav-treeview">
@@ -82,7 +82,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('foods*') ? 'active' : '' }}" href="{!! route('foods.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-fire"></i>@endif
-                        <p>{{trans('lang.food_plural')}}</p></a>
+                        <p>{{trans('lang.restaurant_menu')}}</p></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('foods*') ? 'active' : '' }}" href="{{url('/stocks')}}">@if($icons)

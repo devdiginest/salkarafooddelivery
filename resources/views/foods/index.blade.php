@@ -6,14 +6,14 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{trans('lang.food_plural')}}<small class="ml-3 mr-3">|</small><small>{{trans('lang.food_desc')}}</small></h1>
+        <h1 class="m-0 text-dark">{{trans('lang.restaurant_menus')}}<small class="ml-3 mr-3">|</small><small>{{trans('lang.menu_desc')}}</small></h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('lang.dashboard')}}</a></li>
-          <li class="breadcrumb-item"><a href="{!! route('foods.index') !!}">{{trans('lang.food_plural')}}</a>
+          <li class="breadcrumb-item"><a href="{!! route('foods.index') !!}">{{trans('lang.restaurant_menus')}}</a>
           </li>
-          <li class="breadcrumb-item active">{{trans('lang.food_table')}}</li>
+          <li class="breadcrumb-item active">{{trans('lang.menu_table')}}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -28,11 +28,11 @@
     <div class="card-header">
       <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
         <li class="nav-item">
-          <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>{{trans('lang.food_table')}}</a>
+          <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>{{trans('lang.menu_table')}}</a>
         </li>
         @can('foods.create')
         <li class="nav-item">
-          <a class="nav-link" href="{!! route('foods.create') !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.food_create')}}</a>
+          <a class="nav-link" href="{!! route('foods.create') !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.add_dish')}}</a>
         </li>
         @endcan
         @include('layouts.right_toolbar', compact('dataTable'))

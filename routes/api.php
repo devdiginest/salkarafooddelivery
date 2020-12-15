@@ -2,7 +2,7 @@
 /**
  * File name: api.php
  * Last modified: 2020.08.20 at 17:21:16
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: Diginest
  * Copyright (c) 2020
  */
 

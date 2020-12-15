@@ -30,13 +30,13 @@
     </div>
 
     <!-- Foods Field -->
-    <div class="form-group row ">
+    {{-- <div class="form-group row ">
         {!! Form::label('foods[]', trans("lang.restaurant_menus"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::select('foods[]', $food, $foodsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple' , 'id' => 'foods']) !!}
             <div class="form-text text-muted">{{ trans("lang.restaurant_menus_help") }}</div>
         </div>
-    </div>
+    </div> --}}
 
     @hasanyrole('admin|manager')
     <!-- Users Field -->
@@ -218,7 +218,7 @@
             dz_var15671147011688676454ble[0].mockFile = var15671147011688676454ble;
             dropzoneFields['image'] = dz_var15671147011688676454ble;
         </script>
-         <script type="text/javascript">
+         {{-- <script type="text/javascript">
 
               $('#cat').on('change', function() {
                 var url = "{{url('/restaurants')}}";
@@ -242,7 +242,7 @@
                     }
                 });
               });
-            </script>
+            </script> --}}
 @endprepend
 
 <!-- Description Field -->
@@ -268,7 +268,7 @@
 
 @hasrole('admin')
 <div class="col-12 custom-field-container">
-    <h5 class="col-12 pb-4">{!! trans('lang.admin_area') !!}</h5>
+    <h5 class="col-12 pb-4">{!! trans('lang.restaurant_user') !!}</h5>
     <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
         <!-- Users Field -->
         <div class="form-group row ">
