@@ -30,8 +30,8 @@
     </div>
 
     <!-- Foods Field -->
-    <div class="form-group row ">
-        {!! Form::label('foods[]', trans("lang.restaurant_menus"),['class' => 'col-3 control-label text-right']) !!}
+    <div class="form-group row d-none">
+        {!! Form::label('foods[]', trans("lang.restaurant_menus"),['class' => 'col-3 control-label text-right ']) !!}
         <div class="col-9">
             {!! Form::select('foods[]', $food, $foodsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple' , 'id' => 'foods']) !!}
             <div class="form-text text-muted">{{ trans("lang.restaurant_menus_help") }}</div>
