@@ -1021,7 +1021,7 @@ return [
     'restaurant_delivery_range_help' => 'Enter the delivery range of the restaurant',
     'restaurant_default_tax' => 'Default Tax of the restaurant',
     'restaurant_default_tax_placeholder' => '19',
-    'restaurant_default_tax_help' => 'Enter the default tax to overwrite the default tax',
+    'restaurant_default_tax_help' => 'Enter the default tax to overwrite the default tax, Ex: 20 for (20%)',
     'admin_area' => 'Admin Configurations',
     'restaurant_cuisines' => 'Cuisines',
     'restaurant_cuisines_help' => 'Select the cuisine for this restaurant',
@@ -1194,4 +1194,6 @@ return [
     'menu_desc' => 'Menu Management',
     'add_dish' => 'Add Dish',
     'dish_edit' => 'Edit Dish',
+    'restaurant_name_filter' => 'Select Restaurant',
+    'restaurant_select_help' => 'Select the restaurant name for this dish',
 ];

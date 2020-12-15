@@ -52,6 +52,9 @@ class FoodDataTable extends DataTable
             ->editColumn('featured', function ($food) {
                 return getBooleanColumn($food, 'featured');
             })
+            ->editColumn('restaurant', function ($food) {
+                return getArrayColumn($food->restaurants,'name');
+            })
             ->addColumn('action', 'foods.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
 
@@ -67,8 +70,19 @@ class FoodDataTable extends DataTable
     public function query(Food $model)
     {
 
+        $rest_id = $this->request()->get('rest_name');
+
         if (auth()->user()->hasRole('admin')) {
-            return $model->newQuery()->with("restaurant")->with("category")->select('foods.*')->orderBy('foods.updated_at','desc');
+            
+            $query = $model->newQuery()->with("restaurant")->with("category")->select('foods.*')->orderBy('foods.updated_at','desc');
+
+            if (!empty($rest_id)) {
+
+                $query = $query->whereHas('restaurants', function($q) use($rest_id){
+                    $q->where('id', '=', $rest_id);
+                });
+            }
+            return $query;
         } else if (auth()->user()->hasRole('manager')) {
             return $model->newQuery()->with("restaurant")->with("category")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
@@ -150,7 +164,7 @@ class FoodDataTable extends DataTable
 
             ],
             [
-                'data' => 'restaurant.name',
+                'data' => 'restaurant',
                 'title' => trans('lang.food_restaurant_id'),
 
             ],

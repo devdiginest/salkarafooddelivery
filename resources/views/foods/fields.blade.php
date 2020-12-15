@@ -172,13 +172,20 @@
     </div>
 
     <!-- Restaurant Id Field -->
-    <!-- <div class="form-group row ">
+    {{-- <div class="form-group row ">
         {!! Form::label('restaurant_id', trans("lang.food_restaurant_id"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::select('restaurant_id', $restaurant, null, ['class' => 'select2 form-control']) !!}
             <div class="form-text text-muted">{{ trans("lang.food_restaurant_id_help") }}</div>
         </div>
-    </div> -->
+    </div> --}}
+    <div class="form-group row ">
+        {!! Form::label('restaurants[]', trans("lang.restaurant_plural"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('restaurants[]', $restaurant, $restaurantsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple' , 'id' => 'foods']) !!}
+            <div class="form-text text-muted">{{ trans("lang.restaurant_select_help") }}</div>
+        </div>
+    </div>
 
     <!-- Category Id Field -->
     <div class="form-group row ">

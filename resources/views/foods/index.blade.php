@@ -39,7 +39,48 @@
       </ul>
     </div>
     <div class="card-body">
+      <form class="offset-3">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="rest_name">{{trans('lang.restaurant_name_filter')}}</label>
+            
+            <select name="rest_name" id="rest_name" class="form-control mb-2">
+              <option value="">Choose</option>
+              @foreach ($restaurant as $item)
+              <option value="{{$item->id}}">{{$item->name}}</option>
+              @endforeach
+            </select>
+            <button type="button" class="btn btn-primary" id="generate">Generate</button>
+            <button type="button" class="btn btn-danger" id="reset">Reset</button>
+          </div>
+        </div>
+      </form>
       @include('foods.table')
+      @push('scripts_lib')
+      <script>
+        const table = $("#dataTableBuilder");
+
+        table.on('preXhr.dt', function(e,settings,data){
+          data.rest_name = $("#rest_name").val();
+        });
+
+        $("#generate").on('click', function(){
+            table.DataTable().ajax.reload();
+            return false;
+        });
+
+        $("#reset").on('click', function(){
+          
+          table.on('preXhr.dt', function(e,settings,data){
+            data.rest_name = '';
+          });
+
+          table.DataTable().ajax.reload();
+            return false;
+        });
+
+      </script>
+      @endpush
       <div class="clearfix"></div>
     </div>
   </div>

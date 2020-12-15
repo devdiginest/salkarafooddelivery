@@ -68,7 +68,8 @@ class FoodController extends Controller
      */
     public function index(FoodDataTable $foodDataTable)
     {
-        return $foodDataTable->render('foods.index');
+        $restaurant = $this->restaurantRepository->get();
+        return $foodDataTable->render('foods.index',['restaurant'=>$restaurant]);
     }
 
     /**
@@ -85,12 +86,16 @@ class FoodController extends Controller
         } else {
             $restaurant = $this->restaurantRepository->myActiveRestaurants()->pluck('name', 'id');
         }
+        $restaurantsSelected = [];
         $hasCustomField = in_array($this->foodRepository->model(), setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->foodRepository->model());
             $html = generateCustomField($customFields);
         }
-        return view('foods.create')->with("customFields", isset($html) ? $html : false)->with("restaurant", $restaurant)->with("category", $category);
+        return view('foods.create')->with("customFields", isset($html) ? $html : false)
+        ->with("restaurant", $restaurant)
+        ->with('restaurantsSelected',$restaurantsSelected)
+        ->with("category", $category);
     }
 
     /**
@@ -139,7 +144,7 @@ class FoodController extends Controller
 
             return redirect(route('foods.index'));
         }
-
+        dd($food);
         return view('foods.show')->with('food', $food);
     }
 
@@ -165,6 +170,7 @@ class FoodController extends Controller
         } else {
             $restaurant = $this->restaurantRepository->myRestaurants()->pluck('name', 'id');
         }
+        $restaurantsSelected = $food->restaurants()->pluck('restaurants.id')->toArray();
         $customFieldsValues = $food->customFieldsValues()->with('customField')->get();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->foodRepository->model());
         $hasCustomField = in_array($this->foodRepository->model(), setting('custom_field_models', []));
@@ -172,7 +178,10 @@ class FoodController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-        return view('foods.edit')->with('food', $food)->with("customFields", isset($html) ? $html : false)->with("restaurant", $restaurant)->with("category", $category);
+        return view('foods.edit')->with('food', $food)->with("customFields", isset($html) ? $html : false)
+        ->with("restaurant", $restaurant)
+        ->with('restaurantsSelected', $restaurantsSelected)
+        ->with("category", $category);
     }
 
     /**
