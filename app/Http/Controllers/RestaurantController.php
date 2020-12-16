@@ -35,6 +35,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Food;
 use Prettus\Validator\Exceptions\ValidatorException;
 
+use App\Stock;
+
 class RestaurantController extends Controller
 {
     /** @var  RestaurantRepository */
@@ -155,7 +157,20 @@ class RestaurantController extends Controller
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
+        if (!empty($restaurant)) {
+            // $n = count($request->foods);
 
+            $food_id = $request->foods;
+            
+            foreach ($food_id as $value) {
+                $stock = new Stock();
+        
+                $stock->food_id = $value;
+                $stock->restaurant_id = $restaurant->id;
+        
+                $stock->save();
+            }
+        }
         Flash::success(__('lang.saved_successfully', ['operator' => __('lang.restaurant')]));
 
         return redirect(route('restaurants.index'));

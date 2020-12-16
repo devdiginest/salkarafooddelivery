@@ -64,11 +64,11 @@
                             {{env('APP_CONSTRUCTION','') }}</a>
                     </li>
                 @endif
-                @can('carts.index')
+                {{-- @can('carts.index')
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('carts*') ? 'active' : '' }}" href="{!! route('carts.index') !!}"><i class="fa fa-shopping-cart"></i></a>
                     </li>
-                @endcan
+                @endcan --}}
                 @can('notifications.index')
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('notifications*') ? 'active' : '' }}" href="{!! route('notifications.index') !!}"><i class="fa fa-bell"></i></a>

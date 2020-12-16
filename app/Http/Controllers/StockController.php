@@ -6,20 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Stock;
 
-use App\Criteria\Foods\FoodsOfUserCriteria;
-use App\DataTables\FoodDataTable;
-use App\Http\Requests\CreateFoodRequest;
-use App\Http\Requests\UpdateFoodRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\FoodRepository;
 use App\Repositories\UploadRepository;
 use Flash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
-use Prettus\Validator\Exceptions\ValidatorException;
 
 class StockController extends Controller
 {
