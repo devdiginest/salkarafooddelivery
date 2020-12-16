@@ -39,11 +39,11 @@
       </ul>
     </div>
     <div class="card-body">
-      <form class="form-inline offset-3">
+      <form class="form-inline offset-3 position-absolute">
         <div class="form-row">
           <div class="form-group">
-            <label for="rest_name" class="m-2">{{trans('lang.restaurant_name_filter')}}</label>
-            <select name="rest_name" id="rest_name" class="form-control m-2">
+            <label for="rest_name" class="mx-2">{{trans('lang.restaurant_name_filter')}}</label>
+            <select name="rest_name" id="rest_name" class="form-control mx-2 select-custom">
               <option value="">Choose</option>
               @foreach ($restaurant as $item)
               <option value="{{$item->id}}">{{$item->name}}</option>
@@ -51,8 +51,8 @@
             </select>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-primary m-2" id="generate">Generate</button>
-            <button type="button" class="btn btn-danger m-2" id="reset">Reset</button>
+            <button type="button" class="btn btn-primary mx-2 btn-custom" id="generate">Generate</button>
+            <button type="button" class="btn btn-danger mx-2 btn-custom" id="reset">Reset</button>
           </div>
         </div>
       </form>

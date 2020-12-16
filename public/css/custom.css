@@ -393,6 +393,13 @@ nav.nmain-header .brand-text{
     opacity: 0 !important;
 }
 
+.select-custom{
+    height: 32px !important;
+}
+.btn-custom{
+    padding: 3px 15px;
+}
+
 @media (min-width: 1440px) {
     .container {
         max-width: 1550px;
