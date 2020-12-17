@@ -305,6 +305,7 @@ class RestaurantController extends Controller
 
             $data = DB::delete('delete from restaurant_categories where restaurant_id  = ?',[$id]);
             $detroy = DB::delete('delete from restaurant_foods where restaurant_id  = ?',[$id]);
+            $stockdelete = DB::delete('delete from stocks where restaurant_id  = ?',[$id]);
             $this->restaurantRepository->delete($id);
 
             Flash::success(__('lang.deleted_successfully', ['operator' => __('lang.restaurant')]));
