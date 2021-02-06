@@ -2,7 +2,7 @@
 /**
  * File name: RestaurantAPIController.php
  * Last modified: 2020.05.04 at 09:04:19
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: Diginest - http://diginestsolutions.com
  * Copyright (c) 2020
  *
  */
@@ -80,6 +80,11 @@ class RestaurantAPIController extends Controller
         }
 
         return $this->sendResponse($restaurants->toArray(), 'Restaurants retrieved successfully');
+    }
+
+    public function getcategories($rid){
+        $categories = Restaurant::where('id',$rid)->with('categories')->get();
+        return $this->sendResponse($categories->toArray(),'Restaurant categories retrieved successfully');
     }
 
     /**
