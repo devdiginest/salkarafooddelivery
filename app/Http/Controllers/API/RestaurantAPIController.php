@@ -82,9 +82,32 @@ class RestaurantAPIController extends Controller
         return $this->sendResponse($restaurants->toArray(), 'Restaurants retrieved successfully');
     }
 
+    /**
+     * Display Restaurant Categories.
+     * GET|HEAD /restaurant_categories/{rid}
+     *
+     * @param int $rid
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function getcategories($rid){
         $categories = Restaurant::where('id',$rid)->with('categories')->get();
         return $this->sendResponse($categories->toArray(),'Restaurant categories retrieved successfully');
+    }
+
+    /**
+     * Display Restaurant Foods.
+     * GET|HEAD /restaurant_foods/{rid}
+     *
+     * @param int $rid
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getfoods($rid){
+        $foods = Restaurant::where('id',$rid)->with('foods')->get();
+        return $this->sendResponse($foods->toArray(),'Restaurant foods retrieved successfully');
     }
 
     /**

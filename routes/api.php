@@ -50,6 +50,7 @@ Route::resource('restaurants', 'API\RestaurantAPIController');
 //Restaurant Categories
 
 Route::get('restaurant_categories/{rid}', 'API\RestaurantAPIController@getcategories');
+Route::get('restaurant_foods/{rid}', 'API\RestaurantAPIController@getfoods');
 
 Route::resource('faq_categories', 'API\FaqCategoryAPIController');
 Route::get('foods/categories', 'API\FoodAPIController@categories');
