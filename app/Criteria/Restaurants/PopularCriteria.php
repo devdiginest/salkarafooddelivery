@@ -56,14 +56,16 @@ class PopularCriteria implements CriteriaInterface
                 POW(69.1 * ($myLon - longitude) * COS(latitude / 57.3), 2)) AS distance, SQRT(
                 POW(69.1 * (latitude - $areaLat), 2) +
                 POW(69.1 * ($areaLon - longitude) * COS(latitude / 57.3), 2))  AS area count(restaurants.id) as restaurant_count"), "restaurants.*")
-                ->join('foods', 'foods.restaurant_id', '=', 'restaurants.id')
+                ->join('restaurant_foods','restaurant_foods.restaurant_id','=','restaurants.id')
+                ->join('foods', 'foods.id', '=', 'restaurant_foods.food_id')
                 ->join('food_orders', 'foods.id', '=', 'food_orders.food_id')
                 ->orderBy('restaurant_count', 'desc')
                 ->orderBy('area')
                 ->groupBy('restaurants.id');
         } else {
             return $model->select(DB::raw("count(restaurants.id) as restaurant_count"), "restaurants.*")
-                ->join('foods', 'foods.restaurant_id', '=', 'restaurants.id')
+            ->join('restaurant_foods','restaurant_foods.restaurant_id','=','restaurants.id')    
+            ->join('foods', 'foods.id', '=', 'restaurant_foods.food_id')
                 ->join('food_orders', 'foods.id', '=', 'food_orders.food_id')
                 ->orderBy('restaurant_count', 'desc')
                 ->groupBy('restaurants.id');

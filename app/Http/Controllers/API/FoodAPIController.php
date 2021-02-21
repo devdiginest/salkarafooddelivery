@@ -106,6 +106,8 @@ class FoodAPIController extends Controller
         return $this->sendResponse($foods->toArray(), 'Foods retrieved successfully');
     }
 
+    
+
     /**
      * Display the specified Food.
      * GET|HEAD /foods/{id}
