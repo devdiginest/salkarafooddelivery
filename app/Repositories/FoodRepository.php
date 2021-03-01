@@ -51,7 +51,8 @@ class FoodRepository extends BaseRepository implements CacheableInterface
      **/
     public function myFoods()
     {
-        return Food::join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
+        return Food::join("user_restaurants", "user_restaurants.restaurant_id", "=", "restaurant_foods.restaurant_id")
+            ->where('restaurant_foods.food_id','=','foods.id')
             ->where('user_restaurants.user_id', auth()->id())->get();
     }
 
