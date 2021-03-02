@@ -107,10 +107,10 @@ class RestaurantAPIController extends Controller
      */
 
     public function getfoods($rid){
-        // $foods = Restaurant::where('id',$rid)->with('foods')->get();
-        $foods = Category::join('restaurant_categories','categories.id','=','restaurant_categories.category_id')
-                ->where('restaurant_categories.restaurant_id','=',$rid)
-                ->with('foods')->get();
+         $foods = Restaurant::where('id',$rid)->with('foods')->get();
+        // $foods = Category::join('restaurant_categories','categories.id','=','restaurant_categories.category_id')
+        //         ->where('restaurant_categories.restaurant_id','=',$rid)
+        //         ->with('foods')->get();
         return $this->sendResponse($foods->toArray(),'Restaurant foods retrieved successfully');
     }
 
