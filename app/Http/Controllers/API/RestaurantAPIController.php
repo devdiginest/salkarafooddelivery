@@ -17,6 +17,7 @@ use App\Criteria\Restaurants\PopularCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\Category;
+use App\Models\Food;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\UploadRepository;
@@ -93,7 +94,9 @@ class RestaurantAPIController extends Controller
      */
 
     public function getcategories($rid){
-        $categories = Restaurant::where('id',$rid)->with('categories')->get();
+        // $categories = Restaurant::where('id',$rid)->with('categories')->get();
+        $categories = Category::join('restaurant_categories','categories.id','=','restaurant_categories.category_id')
+                ->where('restaurant_categories.restaurant_id','=',$rid)->get();
         return $this->sendResponse($categories->toArray(),'Restaurant categories retrieved successfully');
     }
 
@@ -107,10 +110,12 @@ class RestaurantAPIController extends Controller
      */
 
     public function getfoods($rid){
-         $foods = Restaurant::where('id',$rid)->with('foods')->get();
+        //  $foods = Restaurant::where('id',$rid)->with('foods')->get();
         // $foods = Category::join('restaurant_categories','categories.id','=','restaurant_categories.category_id')
         //         ->where('restaurant_categories.restaurant_id','=',$rid)
         //         ->with('foods')->get();
+        $foods = Food::join('restaurant_foods','foods.id','=','restaurant_foods.food_id')
+        ->where('restaurant_foods.restaurant_id','=',$rid)->get();
         return $this->sendResponse($foods->toArray(),'Restaurant foods retrieved successfully');
     }
 
