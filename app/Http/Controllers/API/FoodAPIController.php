@@ -120,13 +120,14 @@ class FoodAPIController extends Controller
     {
         /** @var Food $food */
         if (!empty($this->foodRepository)) {
-            try{
-                $this->foodRepository->pushCriteria(new RequestCriteria($request));
-                $this->foodRepository->pushCriteria(new LimitOffsetCriteria($request));
-            } catch (RepositoryException $e) {
-                return $this->sendError($e->getMessage());
-            }
-            $food = $this->foodRepository->findWithoutFail($id);
+            // try{
+            //     $this->foodRepository->pushCriteria(new RequestCriteria($request));
+            //     $this->foodRepository->pushCriteria(new LimitOffsetCriteria($request));
+            // } catch (RepositoryException $e) {
+            //     return $this->sendError($e->getMessage());
+            // }
+            // $food = $this->foodRepository->findWithoutFail($id);
+            $food = Food::where('id',$id)->with('restaurants')->first();
         }
 
         if (empty($food)) {
