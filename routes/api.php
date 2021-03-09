@@ -55,6 +55,7 @@ Route::get('restaurant_foods/{rid}', 'API\RestaurantAPIController@getfoods');
 Route::resource('faq_categories', 'API\FaqCategoryAPIController');
 Route::get('foods/categories', 'API\FoodAPIController@categories');
 Route::resource('foods', 'API\FoodAPIController');
+Route::get('getfoods/{id}/{restaurantid}', 'API\FoodAPIController@getfoods');
 Route::resource('galleries', 'API\GalleryAPIController');
 Route::resource('food_reviews', 'API\FoodReviewAPIController');
 Route::resource('nutrition', 'API\NutritionAPIController');
