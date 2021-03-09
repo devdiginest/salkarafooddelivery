@@ -16,6 +16,7 @@ use App\Criteria\Foods\FoodsOfCuisinesCriteria;
 use App\Criteria\Foods\TrendingWeekCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use App\Models\Restaurant;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\FoodRepository;
 use App\Repositories\UploadRepository;
@@ -118,6 +119,7 @@ class FoodAPIController extends Controller
      */
     public function show(Request $request, $id)
     {
+       
         /** @var Food $food */
         if (!empty($this->foodRepository)) {
             // try{
@@ -127,7 +129,42 @@ class FoodAPIController extends Controller
             //     return $this->sendError($e->getMessage());
             // }
             // $food = $this->foodRepository->findWithoutFail($id);
-            $food = Food::where('id',$id)->with('restaurants')->first();
+            
+            $food = Food::where('id',$id)->first();
+            
+        }
+
+        if (empty($food)) {
+            return $this->sendError('Food not found');
+        }
+
+        return $this->sendResponse($food->toArray(), 'Food retrieved successfully');
+    }
+
+    /**
+     * Display the specified Food.
+     * GET|HEAD /foods/{id}
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getfoods($id, $restaurantid)
+    {
+        
+        /** @var Food $food */
+        if (!empty($this->foodRepository)) {
+            // try{
+            //     $this->foodRepository->pushCriteria(new RequestCriteria($request));
+            //     $this->foodRepository->pushCriteria(new LimitOffsetCriteria($request));
+            // } catch (RepositoryException $e) {
+            //     return $this->sendError($e->getMessage());
+            // }
+            // $food = $this->foodRepository->findWithoutFail($id);
+
+            $food = Food::where('id',$id)->first();
+            
+            $food->restaurant = Restaurant::where('id',$restaurantid)->first();
         }
 
         if (empty($food)) {

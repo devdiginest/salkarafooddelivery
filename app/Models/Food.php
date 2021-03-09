@@ -98,9 +98,10 @@ class Food extends Model implements HasMedia
      */
     protected $appends = [
         'custom_fields',
-        'has_media',
-        'restaurant'
+        'has_media'
     ];
+
+    protected $hidden   = [ 'restaurant_id'];
 
     /**
      * @param Media|null $media
@@ -207,18 +208,18 @@ class Food extends Model implements HasMedia
      * get restaurant attribute
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\BelongsTo|object|null
      */
-    public function getRestaurantAttribute()
-    {
-        return $this->restaurant()->first(['id', 'name', 'delivery_fee', 'address', 'phone','default_tax','available_for_delivery']);
-    }
+    // public function getRestaurantAttribute()
+    // {
+    //     return $this->restaurant()->first(['id', 'name', 'delivery_fee', 'address', 'phone','default_tax','available_for_delivery']);
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function restaurant()
-    {
-        return $this->belongsTo(\App\Models\Restaurant::class, 'restaurant_id', 'id');
-    }
+    // public function restaurant()
+    // {
+    //     return $this->belongsTo(\App\Models\Restaurant::class, 'restaurant_id', 'id');
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
