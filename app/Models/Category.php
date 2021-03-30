@@ -2,7 +2,7 @@
 /**
  * File name: Category.php
  * Last modified: 2020.05.02 at 08:39:42
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: Diginest solutions - https://diginestsolutions.com
  * Copyright (c) 2020
  *
  */

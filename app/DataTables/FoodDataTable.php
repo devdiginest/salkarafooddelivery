@@ -2,7 +2,7 @@
 /**
  * File name: FoodDataTable.php
  * Last modified: 2020.05.04 at 09:04:18
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: diginestsolutions - https://diginestsolutions.com
  * Copyright (c) 2020
  *
  */
@@ -71,10 +71,11 @@ class FoodDataTable extends DataTable
     {
 
         $rest_id = $this->request()->get('rest_name');
+        //return ($rest_id);
 
         if (auth()->user()->hasRole('admin')) {
             
-            $query = $model->newQuery()->with("restaurant")->with("category")->select('foods.*')->orderBy('foods.updated_at','desc');
+            $query = $model->newQuery()->with("restaurants")->with("category")->select('foods.*')->orderBy('foods.updated_at','desc');
 
             if (!empty($rest_id)) {
 

@@ -2,7 +2,7 @@
 /**
  * File name: Restaurant.php
  * Last modified: 2020.04.30 at 08:21:09
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Author: Diginest Solutions - https://diginestsolutions.com
  * Copyright (c) 2020
  *
  */
